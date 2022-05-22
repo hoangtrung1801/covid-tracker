@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News</title>
+
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://unpkg.com/phosphor-icons"></script>
+
+</head>
+
+<body class="text-gray-600">
+    <!-- Nav -->
+    <nav class="w-24 bg-gray-100 h-screen fixed inset-0 z-[200]">
+        <div class="flex flex-col">
+            <div class="font-bold uppercase text-xs text-center py-12">
+                <span>COVID19</span>
+                <span>tracker</span>
+            </div>
+            <div class="flex flex-col text-3xl peer">
+                <a href="/" class="peer hover:text-blue-600 py-10 h-12 w-full flex justify-center items-center">
+                    <i class="ph-house"></i>
+                </a>
+                <a href="/news.html" class="hover:text-blue-600 py-10 h-12 w-full flex justify-center items-center">
+                    <i class="ph-newspaper"></i>
+                </a>
+                <a href="#" class="hover:text-blue-600 py-10 h-12 w-full flex justify-center items-center">
+                    <i class="ph-globe-hemisphere-east"></i>
+                </a>
+            </div>
+
+            <div
+                class="absolute w-0 h-full bg-gray-100 inset-0 overflow-hidden translate-x-24 peer-hover:w-60 transition-all hover:w-60">
+                <div class="flex flex-col mt-32">
+                    <div class="flex flex-col text-lg font-semibold">
+                        <a href="/"
+                            class="py-10 px-4 h-12 w-full flex items-center hover:bg-blue-200 hover:text-blue-600 transition-colors">
+                            <span class="">Trang chủ</span>
+                        </a>
+                        <a href="/news.html"
+                            class="py-10 px-4 h-12 w-full flex items-center hover:bg-blue-200 hover:text-blue-600 transition-colors">
+                            <span class="">Tin tức</span>
+                        </a>
+                        <a href="#"
+                            class="py-10 px-4 h-12 w-full flex items-center hover:bg-blue-200 hover:text-blue-600 transition-colors">
+                            <span class="">Thế giới</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- End nav -->
+
+    <div class="min-h-screen ml-24 px-20 py-16">
+        <div class="w-full text-center mb-16">
+            <h1 class="font-bold text-4xl ">Tin tức về Covid-19</h1>
+        </div>
+        <div>
+            <section class="text-gray-600 body-font">
+                <div class="container px-5 pb-12 mx-auto">
+                    <div class="news flex flex-wrap -m-4">
+                    </div>
+                </div>
+                <div class="text-center">
+                    <!-- <button class="relative h-[40px] w-[100px] rounded bg-gray-200 hover:bg-gray-200 hover:border font-semibold">Thêm </button> -->
+                    <button class="min-w-[100px] bg-gradient-to-r from-cyan-300 to-blue-300 hover:scale-105 drop-shadow-md  shadow-cla-blue px-4 py-1 rounded-lg font-semibold uppercase button-more">Nhiều hơn</button>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="./script/news.js"></script>
+
+</body>
+
+</html>

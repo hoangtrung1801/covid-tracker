@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://unpkg.com/phosphor-icons"></script>
+
+    <!-- Chart js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.0/dist/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@^1"></script>
+</head>
+
+<body class="text-gray-600">
+    <!-- Nav -->
+    <nav class="w-24 bg-gray-100 h-screen fixed inset-0 z-[200]">
+        <div class="flex flex-col">
+            <div class="font-bold uppercase text-xs text-center py-12">
+                <span>COVID19</span>
+                <span>tracker</span>
+            </div>
+            <div class="flex flex-col text-3xl peer">
+                <a href="/" class="peer hover:text-blue-600 py-10 h-12 w-full flex justify-center items-center">
+                    <i class="ph-house"></i>
+                </a>
+                <a href="/news.html" class="hover:text-blue-600 py-10 h-12 w-full flex justify-center items-center">
+                    <i class="ph-newspaper"></i>
+                </a>
+                <a href="#" class="hover:text-blue-600 py-10 h-12 w-full flex justify-center items-center">
+                    <i class="ph-globe-hemisphere-east"></i>
+                </a>
+            </div>
+
+            <div
+                class="absolute w-0 h-full bg-gray-100 inset-0 overflow-hidden translate-x-24 peer-hover:w-60 transition-all hover:w-60">
+                <div class="flex flex-col mt-32">
+                    <div class="flex flex-col text-lg font-semibold">
+                        <a href="/"
+                            class="py-10 px-4 h-12 w-full flex items-center hover:bg-blue-200 hover:text-blue-600 transition-colors">
+                            <span class="">Trang chủ</span>
+                        </a>
+                        <a href="/news.html"
+                            class="py-10 px-4 h-12 w-full flex items-center hover:bg-blue-200 hover:text-blue-600 transition-colors">
+                            <span class="">Tin tức</span>
+                        </a>
+                        <a href="#"
+                            class="py-10 px-4 h-12 w-full flex items-center hover:bg-blue-200 hover:text-blue-600 transition-colors">
+                            <span class="">Thế giới</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- End nav -->
+
+
+    <div class="min-h-screen ml-24 px-20 py-16">
+        <div class="w-full text-center mb-16">
+            <h1 class="font-bold text-4xl ">Số liệu Covid-19 tại Việt Nam</h1>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2  gap-x-12">
+            <div class="space-y-10">
+                <div class="text-center -mb-5">
+                    <p class="today font-bold text-xs text-gray-500">Ngày 1/1/2022, 12:00AM</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-x-2 gap-y-2">
+                    <div class="w-full space-y-4 bg-red-100 text-red-500 rounded-md text-center px-4 py-6 hover:bg-red-200 transition-all">
+                        <p class="font-bold text-sm">Ca nhiễm</p>
+                        <div class="info-covid text-center font-bold space-y-1">
+                            <p class="text-red-400 text-sm ">+0</p>
+                            <p class="text-lg truncate">0,0,0</p>
+                        </div>
+                        <div class="text-7xl text-red-400">
+                            <i class="ph-smiley-sad-fill"></i>
+                        </div>
+                    </div>
+                    <div class="w-full space-y-4 bg-green-100 text-green-500 rounded-md text-center px-4 py-6 hover:bg-green-200 transition-all">
+                        <p class="font-bold text-sm">Mũi 1</p>
+                        <div class="info-vaccine1 text-center font-bold space-y-1">
+                            <p class="text-green-400 text-sm ">+0</p>
+                            <p class="text-lg truncate">0,0,0</p>
+                        </div>
+                        <div class="text-7xl text-green-400">
+                            <i class="ph-smiley-fill"></i>
+                        </div>
+                    </div>
+                    <div class="w-full space-y-4 bg-emerald-100 text-emerald-500 rounded-md text-center px-4 py-6 hover:bg-emerald-200 transition-all">
+                        <p class="font-bold text-sm">Mũi 2</p>
+                        <div class="info-vaccine2 text-center font-bold space-y-1">
+                            <p class="text-emerald-400 text-sm ">+0</p>
+                            <p class="text-lg truncate">0,0,0</p>
+                        </div>
+                        <div class="text-7xl text-emerald-400">
+                            <i class="ph-smiley-fill"></i>
+                        </div>
+                    </div>
+                    <div class="w-full space-y-4 bg-neutral-100 text-neutral-500 rounded-md text-center px-4 py-6 hover:bg-neutral-200 transition-all">
+                        <p class="font-bold text-sm">Tử vong</p>
+                        <div class="info-death text-center font-bold space-y-1">
+                            <p class="text-neutral-400 text-sm ">+0</p>
+                            <p class="text-lg truncate">0,0,0</p>
+                        </div>
+                        <div class="text-7xl text-neutral-400">
+                            <i class="ph-smiley-x-eyes-fill"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="p-1 relative search-input">
+                        <input type="text" class="w-full p-4 pl-12 border-gray-100 rounded-lg transition-all shadow-all focus:outline-0 peer focus:scale-110 peer" placeholder="Tìm kiếm tỉnh / thành">
+                        <div class="absolute top-[50%] left-4 translate-y-[-50%] text-2xl transition-all peer-focus:-left-2 peer-focus:scale-110">
+                            <i class="ph-magnifying-glass-light"></i>
+                        </div>
+                    </div>
+                    <div class="h-screen overflow-y-auto">
+                        <table class="border-collapse table-auto w-full text-sm text-gray-500" id="covidProvinceVN">
+                            <thead class="text-gray-600">
+                                <tr>
+                                    <!-- <th class="p-2 text-left bg-gray-100 border-4 border-white rounded-xl font-semibold">#</th> -->
+                                    <th class="p-2 text-left bg-gray-100 border-4 border-white rounded-xl font-semibold">
+                                        Thành phố / Tỉnh</th>
+                                    <th class="p-2 text-right bg-gray-100 border-4 border-white rounded-xl font-semibold">
+                                        Hôm nay</th>
+                                    <th class="p-2 text-right bg-gray-100 border-4 border-white rounded-xl font-semibold">
+                                        Tổng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full h-24 space-y-4">
+                <div >
+                    <button class="choose-total w-24 rounded-md p-4 bg-gray-100 hover:bg-gray-200 font-bold text-sm text-gray-500">Tổng</button>
+                    <button class="choose-day w-24 rounded-md p-4 bg-gray-100 hover:bg-gray-200 font-bold text-sm text-gray-500">Ngày</button>
+                </div>
+                <div class="space-y-8">
+                    <div class="bg-red-200 p-4 rounded-xl relative">
+                        <canvas id="covidVN" width="100" height="50"></canvas>
+                        <div class="absolute top-0 left-0 p-4">
+                            <p class="font-bold text-red-500 uppercase">ca nhiễm</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-green-200 p-4 rounded-xl relative">
+                        <canvas id="vaccineVN" width="100" height="50"></canvas>
+                        <div class="absolute top-0 left-0 p-4">
+                            <p class="font-bold text-green-500 uppercase">Vaccine</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-neutral-200 p-4 rounded-xl relative">
+                        <canvas id="deathVN" width="100" height="50"></canvas>
+                        <div class="absolute top-0 left-0 p-4">
+                            <p class="font-bold text-neutral-500 uppercase">Tử vong</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./script/index.js"></script>
+</body>
+
+</html>
