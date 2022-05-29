@@ -1,4 +1,7 @@
-// const urlCovidWorld = "https://disease.sh/v3/covid-19/historical/all?lastdays=all";
+const urlCovidEveryday = "https://disease.sh/v3/covid-19/historical/all?lastdays=all";
+const urlTotalCovid = "https://disease.sh/v3/covid-19/all"
+const urlCovidCountry = "https://disease.sh/v3/covid-19/countries";
+
 const urlVN = "https://disease.sh/v3/covid-19/historical/vn?lastdays=all";
 const urlCovidVN = "https://api.zingnews.vn/public/v2/corona/getChart";
 const urlCovidProvinceVN = "https://api.zingnews.vn/public/v2/corona/getChart?type=province";
@@ -8,13 +11,12 @@ const urlNews = "https://gw.vnexpress.net/ar/get_rule_2?category_id=1004765&limi
 const chooseTotal = document.querySelector('.choose-total');
 const chooseDay = document.querySelector('.choose-day');
 
-const infoVaccine1 = document.querySelector('.info-vaccine1');
-const infoVaccine2 = document.querySelector('.info-vaccine2');
-const infoDeath = document.querySelector('.info-death');
 const inputProvince = document.querySelector('.search-input input');
 
-let vnSeason4, vnSeason4Daily, vaccineFirst, vaccineSecond, deaths, casesProvince;
-let chartCovidVN, chartVaccineVN, chartDeathVN;
+// let vnSeason4, vnSeason4Daily, vaccineFirst, vaccineSecond, deaths, casesProvince;
+let chartCovid, chartRecovered, chartDeath;
+
+let totalCovid, covidEveryday, covidCountry;
 
 const getDataFromURL = async(url) => {
   const result = await fetch(url);
@@ -27,22 +29,21 @@ function numberWithCommas(x) {
 }
 
 const today = new Date();
-let strToday = `Ngày ${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}  ${today.getHours()}:${today.getMinutes()}`
+let strToday = `Ngày ${today.getDate()}/${today.getMonth()}/${today.getYear()} ${today.getHours()}:${today.getSeconds()}`
 document.querySelector('.today').textContent = strToday;
 
 const setCovidChart = (data) => {
     const colorTick = "#ef4444";
     const colorLine = "#f87171";
-    const ctxCovidVN = document.getElementById("covidVN").getContext("2d");
-    const infoCovid = document.querySelector(".info-covid");
+    const ctxCovid = document.getElementById("covid").getContext("2d");
 
-    if(chartCovidVN) chartCovidVN.destroy();
+    if(chartCovid) chartCovid.destroy();
 
-    const dataCovidVN = {
+    const dataCovid = {
         datasets: [
             {
                 label: "Ca nhiễm",
-                data: data.cases,
+                data: covidEveryday.cases,
                 borderColor: colorLine,
                 borderWidth: 3,
                 fill: false,
@@ -141,55 +142,36 @@ const setCovidChart = (data) => {
         },
     };
 
-    chartCovidVN = new Chart(ctxCovidVN, {
+    chartCovid = new Chart(ctxCovid, {
         type: "line",
-        data: dataCovidVN,
+        data: dataCovid,
         options,
     });
 
+    const infoCovid = document.querySelector(".info-covid");
+
     infoCovid.querySelector("p").textContent = `+${numberWithCommas(
-        data.toDay
+        data.todayCases
     )}`;
     infoCovid.querySelector("p:nth-child(2)").textContent = `${numberWithCommas(
-        data.total
+        data.cases
     )}`;
 };
 
-const setVaccineChart = (first, second) => {
-    if(chartVaccineVN) chartVaccineVN.destroy();
+const setRecoveredChart = (data) => {
+    if(chartRecovered) chartRecovered.destroy();
 
     const colorTick = '#22c55e';
-    const colorLine1 = '#4ade80';
-    const colorLine2 = '#34d399';
+    const colorLine = '#4ade80';
 
-    const ctxVaccineVN = document.getElementById("vaccineVN").getContext("2d");
+    const ctxRecovered = document.getElementById("recovered").getContext("2d");
 
-    const dataVaccineVN = {
+    const dataRecovered = {
         datasets: [
             {
-                label: "Mũi 1",
-                // data: first.datas.map(vaccine => (
-                // {
-                //     x: vaccine.x,
-                //     y: vaccine.z
-                // })),
-                data: first,
-                borderColor: colorLine1,
-                borderWidth: 3,
-                fill: false,
-                pointRadius: 0,
-                hoverRadius: 8,
-                hitRadius: 8,
-            },
-            {
-                label: "Mũi 2",
-                // data: second.datas.map(vaccine => (
-                // {
-                //     x: vaccine.x,
-                //     y: vaccine.z
-                // })),
-                data: second,
-                borderColor: colorLine2,
+                label: "Hồi phục",
+                data: covidEveryday.recovered,
+                borderColor: colorLine,
                 borderWidth: 3,
                 fill: false,
                 pointRadius: 0,
@@ -287,25 +269,35 @@ const setVaccineChart = (first, second) => {
         },
     };
 
-    chartVaccineVN = new Chart(ctxVaccineVN, {
+    chartRecovered = new Chart(ctxRecovered, {
         type: "line",
-        data: dataVaccineVN,
+        data: dataRecovered,
         options,
     });
+
+    const infoRecovered = document.querySelector(".info-recovered");
+
+    infoRecovered.querySelector("p").textContent = `+${numberWithCommas(
+        data.todayRecovered
+    )}`;
+    infoRecovered.querySelector("p:nth-child(2)").textContent = `${numberWithCommas(
+        data.recovered
+    )}`;
+
 }
 
 const setDeathChart = (data) => {
     const colorTick = '#737373';
     const colorLine = '#a3a3a3';
-    const ctxDeathVN = document.getElementById("deathVN").getContext("2d");
+    const ctxDeathVN = document.getElementById("death").getContext("2d");
 
-    if(chartDeathVN) chartDeathVN.destroy();
+    if(chartDeath) chartDeath.destroy();
 
-    const dataDeathVN = {
+    const dataDeath = {
         datasets: [
             {
                 label: "Tử vong",
-                data,
+                data: covidEveryday.deaths,
                 borderColor: colorLine,
                 borderWidth: 3,
                 fill: false,
@@ -404,33 +396,27 @@ const setDeathChart = (data) => {
         },
     };
 
-    chartDeathVN = new Chart(ctxDeathVN, {
+    chartDeath = new Chart(ctxDeathVN, {
         type: "line",
-        data: dataDeathVN,
+        data: dataDeath,
         options,
     });
+
+    const infoDeath = document.querySelector(".info-death");
+
+    infoDeath.querySelector("p").textContent = `+${numberWithCommas(
+        data.todayDeaths
+    )}`;
+    infoDeath.querySelector("p:nth-child(2)").textContent = `${numberWithCommas(
+        data.deaths
+    )}`;
+
 }
 
 const setChartTotal = () => {
-    chooseTotal.classList.add('bg-gray-200');
-    chooseDay.classList.remove('bg-gray-200');
-
-    setCovidChart(vnSeason4);
-    setVaccineChart(
-        vaccineFirst.datas.map(vaccine => ({
-            x: vaccine.x,
-            y: vaccine.z
-        })), vaccineSecond.datas.map(vaccine => ({
-            x: vaccine.x,
-            y: vaccine.z
-        }))
-    )
-    setDeathChart(
-        Object.keys(deaths).map((key) => ({
-            x: key,
-            y: deaths[key],
-        }))
-    );
+    setCovidChart(totalCovid);
+    setRecoveredChart(totalCovid);
+    setDeathChart(totalCovid);
 }
 
 const setChartDay = () => {
@@ -438,7 +424,7 @@ const setChartDay = () => {
     chooseTotal.classList.remove('bg-gray-200');
 
     setCovidChart(vnSeason4Daily);
-    setVaccineChart(
+    setRecoveredChart(
         vaccineFirst.datas.map(vaccine => ({
             x: vaccine.x,
             y: vaccine.y
@@ -462,23 +448,23 @@ const setChartDay = () => {
     )
 }
 
-const setCovidProvince = (target, data) => {
+const setCovidCountry = (target, data) => {
     if(target !== "") {
-        data = data.filter(province => {
-            return province.x.toUpperCase().indexOf(target.toUpperCase()) > -1;
-            // return comparison;
+        data = data.filter(country => {
+            return country.country.toUpperCase().indexOf(target.toUpperCase()) > -1;
         })
     }
     const tableBody = document.querySelector('#covidProvinceVN tbody');
 
     tableBody.innerHTML='';
-    data.forEach((province, id) => {
+    data.forEach((country, id) => {
         const item = document.createElement('tr');
         item.className = 'group cursor-default';
         item.innerHTML = `
-        <td class="p-3 bg-gray-100 border-4 text-gray-600 border-white rounded-xl group-hover:bg-gray-200 font-medium">${province.x}</td>
-        <td class="p-3 bg-gray-50 border-4 border-white rounded-xl group-hover:bg-gray-200 text-right text-red-500"> <span class="-mt-1"><i class="ph-arrow-up-bold"></i></span>${province.y}</td>
-        <td class="p-3 bg-gray-50 border-4 border-white rounded-xl group-hover:bg-gray-200 text-right text-gray-500"> ${province.z}</td>
+        <td class="p-3 bg-gray-100 border-4 text-gray-600 border-white rounded-xl group-hover:bg-gray-200 font-medium">${country.country}</td>
+        <td class="p-3 bg-gray-50 border-4 border-white rounded-xl group-hover:bg-gray-200 text-right text-red-500"> <span class="-mt-1"><i class="ph-arrow-up-bold"></i></span>${numberWithCommas(country.todayCases)}</td>
+        <td class="p-3 bg-gray-50 border-4 border-white rounded-xl group-hover:bg-gray-200 text-right text-green-500"><i class="ph-arrow-up-bold"></i></span>${numberWithCommas(country.recovered)}</td>
+        <td class="p-3 bg-gray-50 border-4 border-white rounded-xl group-hover:bg-gray-200 text-right text-neutral-500"><i class="ph-arrow-up-bold"></i></span>${numberWithCommas(country.deaths)}</td>
         `
 
         tableBody.appendChild(item);
@@ -486,44 +472,55 @@ const setCovidProvince = (target, data) => {
 
 }
 
-const searchProvince = (e) => {
+const searchCountry = (e) => {
     if(e.code === "Enter") {
         const target = e.target.value;
-        setCovidProvince(target, casesProvince);
+        setCovidCountry(target, covidCountry);
     }
 }
 
-chooseTotal.addEventListener('click', setChartTotal);
-chooseDay.addEventListener('click', setChartDay);
-inputProvince.addEventListener('keypress', searchProvince)
+// chooseTotal.addEventListener('click', setChartTotal);
+// chooseDay.addEventListener('click', setChartDay);
+inputProvince.addEventListener('keypress', searchCountry)
 
 Promise.all([
     getDataFromURL(urlCovidVN),
     getDataFromURL(urlVaccineVN),
     getDataFromURL(urlVN),
-    getDataFromURL(urlCovidProvinceVN)
-]).then(( [dataCovid, dataVaccine, dataVN, dataCovidProvince] ) => {
-    vnSeason4 = dataCovid.data.vnSeason4;
-    vnSeason4Daily = dataCovid.data.vnSeason4Daily;
+    getDataFromURL(urlCovidProvinceVN),
+    getDataFromURL(urlTotalCovid),
+    getDataFromURL(urlCovidEveryday),
+    getDataFromURL(urlCovidCountry)
+]).then(( [dataCovid, dataVaccine, dataVN, dataCovidProvince, dataTotalCovid, dataCovidEveryday, dataCovidCountry] ) => {
+    // vnSeason4 = dataCovid.data.vnSeason4;
+    // vnSeason4Daily = dataCovid.data.vnSeason4Daily;
 
-    vaccineFirst = dataVaccine.data.first;
-    vaccineSecond = dataVaccine.data.second;
+    // vaccineFirst = dataVaccine.data.first;
+    // vaccineSecond = dataVaccine.data.second;
 
-    deaths = dataVN.timeline.deaths;
+    // deaths = dataVN.timeline.deaths;
 
-    casesProvince = dataCovidProvince.data.cases;
+    // casesProvince = dataCovidProvince.data.cases;
 
-    infoVaccine1.querySelector('p').textContent = `+${numberWithCommas(vaccineFirst.datas[vaccineFirst.datas.length-1].y)}`;
-    infoVaccine1.querySelector('p:nth-child(2)').textContent = numberWithCommas(vaccineFirst.total);
+    // infoVaccine1.querySelector('p').textContent = `+${numberWithCommas(vaccineFirst.datas[vaccineFirst.datas.length-1].y)}`;
+    // infoVaccine1.querySelector('p:nth-child(2)').textContent = numberWithCommas(vaccineFirst.total);
 
-    infoVaccine2.querySelector('p').textContent = `+${numberWithCommas(vaccineSecond.datas[vaccineSecond.datas.length-1].y)}`;
-    infoVaccine2.querySelector('p:nth-child(2)').textContent = numberWithCommas(vaccineSecond.total);
+    // infoVaccine2.querySelector('p').textContent = `+${numberWithCommas(vaccineSecond.datas[vaccineSecond.datas.length-1].y)}`;
+    // infoVaccine2.querySelector('p:nth-child(2)').textContent = numberWithCommas(vaccineSecond.total);
 
-    const today = Object.keys(deaths)[Object.keys(deaths).length-1];
-    const yesterday = Object.keys(deaths)[Object.keys(deaths).length-2];
-    infoDeath.querySelector('p').textContent = `+${numberWithCommas(deaths[today] - deaths[yesterday])}`;
-    infoDeath.querySelector('p:nth-child(2)').textContent = numberWithCommas(deaths[today]);
+    // const today = Object.keys(deaths)[Object.keys(deaths).length-1];
+    // const yesterday = Object.keys(deaths)[Object.keys(deaths).length-2];
+    // infoDeath.querySelector('p').textContent = `+${numberWithCommas(deaths[today] - deaths[yesterday])}`;
+    // infoDeath.querySelector('p:nth-child(2)').textContent = numberWithCommas(deaths[today]);
+
+    // setChartTotal();
+    // setCovidProvince("", casesProvince);
+
+    totalCovid = dataTotalCovid;
+    covidEveryday = dataCovidEveryday;
+    covidCountry = dataCovidCountry;
+    console.log(covidCountry);
 
     setChartTotal();
-    setCovidProvince("", casesProvince);
+    setCovidCountry("", covidCountry);
 })

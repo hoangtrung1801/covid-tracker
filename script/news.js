@@ -18,13 +18,15 @@ getDataFromURL(newsUrl).then((result) => {
     const addNews = (data) => {
         data.forEach((item) => {
             const newsItem = document.createElement("div");
-            newsItem.classList.add("p-4", "md:w-1/2");
+            newsItem.classList.add("p-4", "md:w-full", 'lg:w-1/2');
             newsItem.innerHTML = `
             <div
-                class="h-full rounded-xl shadow-cla-blue bg-gradient-to-r from-indigo-50 to-blue-50 overflow-hidden flex flex-col ">
-                <img class="lg:h-48 md:h-36 w-full object-cover object-center scale-110 transition-all duration-400 hover:scale-100"
-                    src="${item.thumbnail_url}"
-                    alt="blog">
+                class="h-full rounded-xl shadow-cla-blue bg-gradient-to-r from-indigo-50 to-blue-50 overflow-hidden flex flex-col shadow-indigo-100 shadow-md">
+                <div class="overflow-hidden">
+                    <img class="lg:h-48 md:h-36 w-full object-cover object-center transition-all duration-400 hover:scale-110"
+                        src="${item.thumbnail_url}"
+                        alt="blog">
+                </div>
                 <div class="p-6 flex-grow flex flex-col">
                     <h2 class="text-xs title-font font-medium text-gray-400 mb-1">
                         Theo VnExpress</h2>
