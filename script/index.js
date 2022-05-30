@@ -27,7 +27,7 @@ function numberWithCommas(x) {
 }
 
 const today = new Date();
-let strToday = `Ngày ${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}  ${today.getHours()}:${today.getMinutes()}`
+let strToday = `Ngày ${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()},  ${today.toLocaleTimeString()}`
 document.querySelector('.today').textContent = strToday;
 
 const setCovidChart = (data) => {

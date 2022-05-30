@@ -30,7 +30,7 @@ getDataFromURL(newsUrl).then((result) => {
                 <div class="p-6 flex-grow flex flex-col">
                     <h2 class="text-xs title-font font-medium text-gray-400 mb-1">
                         Theo VnExpress</h2>
-                    <h1 class="title-font text-lg font-medium text-gray-600 mb-3">${item.title}</h1>
+                    <h1 class="title-font text-lg font-bold text-gray-600 mb-3">${item.title}</h1>
                     <p class="leading-relaxed mb-3">${item.lead}</p>
                     <div class="flex items-center flex-wrap mt-auto">
                         <a href="${item.share_url}"

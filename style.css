@@ -15,3 +15,7 @@
         @apply text-blue-600
     }
 }
+
+html {
+    font-family:  'Roboto', 'Lato', sans-serif;
+}
