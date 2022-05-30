@@ -34,7 +34,7 @@ getDataFromURL(newsUrl).then((result) => {
                     <p class="leading-relaxed mb-3">${item.lead}</p>
                     <div class="flex items-center flex-wrap mt-auto">
                         <a href="${item.share_url}"
-                            class="bg-gradient-to-r from-gray-200 to-gray-300 hover:scale-105 drop-shadow-md  shadow-cla-blue px-4 py-1 rounded-lg">Đọc thêm</a>
+                            class="bg-gradient-to-r from-gray-200 to-gray-300 hover:scale-105 drop-shadow-md  shadow-cla-blue px-4 py-1 rounded-lg font-semibold transition-transform">Đọc thêm</a>
                     </div>
                 </div>
             </div>
