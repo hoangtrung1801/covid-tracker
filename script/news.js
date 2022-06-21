@@ -8,7 +8,7 @@ const getDataFromURL = async (url) => {
 };
 
 getDataFromURL(newsUrl).then((result) => {
-    const buttonMore = document.querySelector(".button-more");
+    const buttonMore = document.querySelector("#button-more");
     const news = document.querySelector(".news");
     const data = result.data[1004765].data;
 
@@ -21,7 +21,7 @@ getDataFromURL(newsUrl).then((result) => {
             newsItem.classList.add("p-4", "md:w-full", 'lg:w-1/2');
             newsItem.innerHTML = `
             <div
-                class="h-full rounded-xl shadow-cla-blue bg-gradient-to-r from-indigo-50 to-blue-50 overflow-hidden flex flex-col shadow-indigo-100 shadow-md">
+                class="news-item h-full rounded-xl shadow-cla-blue bg-gradient-to-r from-indigo-50 to-blue-50 overflow-hidden flex flex-col shadow-indigo-100 shadow-md">
                 <div class="overflow-hidden">
                     <img class="lg:h-48 md:h-36 w-full object-cover object-center transition-all duration-400 hover:scale-110"
                         src="${item.thumbnail_url}"
@@ -40,6 +40,8 @@ getDataFromURL(newsUrl).then((result) => {
             </div>
         `;
             news.appendChild(newsItem);
+            scrollTrigger('.news-item', {
+            });
         });
     };
 

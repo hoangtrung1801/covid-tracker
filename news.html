@@ -11,10 +11,12 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,500&display=swap" rel="stylesheet">
 
     <script src="https://unpkg.com/phosphor-icons"></script>
 
+    <!-- Animation -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
 
 <body class="text-gray-600">
@@ -70,7 +72,7 @@
     <!-- End nav -->
 
     <div class="min-h-screen ml-24 px-20 py-16">
-        <div class="w-full text-center mb-16">
+        <div class="w-full text-center mb-16 animate-fadeInUp">
             <h1 class="font-extrabold text-4xl uppercase text-gray-600 tracking-wider ">Tin tức về Covid-19</h1>
         </div>
         <div>
@@ -79,15 +81,16 @@
                     <div class="news flex flex-wrap -m-4">
                     </div>
                 </div>
-                <div class="text-center">
+                <div class="text-center animate-fadeInUp">
                     <!-- <button class="relative h-[40px] w-[100px] rounded bg-gray-200 hover:bg-gray-200 hover:border font-semibold">Thêm </button> -->
-                    <button class="min-w-[150px] min-h-[50px] bg-gradient-to-r from-cyan-300 to-blue-300 hover:scale-105 drop-shadow-md shadow-cla-blue px-4 py-1 rounded-lg font-semibold uppercase transition-all">Nhiều hơn</button>
+                    <button id="button-more" class="min-w-[150px] min-h-[50px] bg-gradient-to-r from-cyan-300 to-blue-300 hover:scale-105 drop-shadow-md shadow-cla-blue px-4 py-1 rounded-lg font-semibold uppercase transition-all">Nhiều hơn</button>
                 </div>
             </section>
         </div>
     </div>
 
     <script src="./script/news.js" type="module"></script>
+    <script src="./script/animate.js"></script>
 </body>
 
 </html>

@@ -11,7 +11,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,500&display=swap" rel="stylesheet">
 
     <script src="https://unpkg.com/phosphor-icons"></script>
 
@@ -19,6 +19,9 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.0/dist/chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@^1"></script>
+
+    <!-- Animation -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
 
 <body class="text-gray-600">
@@ -73,18 +76,17 @@
     </nav>
     <!-- End nav -->
 
-
     <div class="min-h-screen ml-24 px-20 py-16">
-        <div class="w-full text-center mb-16">
+        <div class="w-full text-center mb-16 animate-fadeInUp">
             <h1 class="font-extrabold text-4xl uppercase text-gray-600 tracking-wider ">Số liệu Covid-19 tại Việt Nam</h1>
         </div>
         <div class="grid grid-cols-1 lg:grid-cols-2  gap-x-12 space-y-8 lg:space-y-0">
             <div class="space-y-10">
 
-                <div class="text-center -mb-5">
+                <div class="text-center -mb-5 animate-fadeInUp">
                     <p class="today font-bold text-xs text-gray-500">Ngày 1/1/2022, 12:00AM</p>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-x-2 gap-y-2">
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-x-2 gap-y-2 animate-fadeInUp">
                     <div class="w-full space-y-4 bg-red-100 text-red-500 rounded-md text-center px-4 py-6 hover:bg-red-200 transition-all">
                         <p class="font-bold text-sm">Ca nhiễm</p>
                         <div class="info-covid text-center font-bold space-y-1">
@@ -128,15 +130,15 @@
                 </div>
                 <div class="space-y-4">
                     <div class="px-2">
-                        <h1 class="text-lg font-bold">Chi tiết tỉnh thành</h1>
+                        <h1 class="text-lg font-bold animate-fadeInUp">Chi tiết tỉnh thành</h1>
                     </div>
-                    <div class="p-1 relative search-input">
+                    <div class="p-1 relative search-input animate-fadeInUp">
                         <input type="text" class="w-full p-4 pl-12 border-gray-100 rounded-lg transition-all shadow-all focus:outline-0 peer focus:scale-110 peer" placeholder="Tìm kiếm tỉnh / thành">
                         <div class="absolute top-[50%] left-4 translate-y-[-50%] text-2xl transition-all peer-focus:-left-2 peer-focus:scale-110">
                             <i class="ph-magnifying-glass-light"></i>
                         </div>
                     </div>
-                    <div class="h-screen overflow-y-auto">
+                    <div class="h-screen overflow-y-auto animate-fadeInUp">
                         <table class="border-collapse table-auto w-full text-sm text-gray-500" id="covidProvinceVN">
                             <thead class="text-gray-600">
                                 <tr>
@@ -157,29 +159,29 @@
             </div>
 
             <div class="w-full h-24 space-y-4">
-                <div class="px-2">
+                <div class="px-2 animate-fadeInUp">
                     <h1 class="text-lg font-bold">Biểu đồ</h1>
                 </div>
-                <div >
+                <div class=" animate-fadeInUp">
                     <button class="choose-total w-24 rounded-md p-4 bg-gray-100 hover:bg-gray-200 font-bold text-sm text-gray-500">Tổng</button>
                     <button class="choose-day w-24 rounded-md p-4 bg-gray-100 hover:bg-gray-200 font-bold text-sm text-gray-500">Ngày</button>
                 </div>
                 <div class="space-y-8">
-                    <div class="bg-red-200 p-4 rounded-xl relative">
+                    <div class="bg-red-200 p-4 rounded-xl relative animate-fadeInUp">
                         <canvas id="covidVN" width="100" height="50"></canvas>
                         <div class="absolute top-0 left-0 p-4">
                             <p class="font-bold text-red-500 uppercase">ca nhiễm</p>
                         </div>
                     </div>
 
-                    <div class="bg-green-200 p-4 rounded-xl relative">
+                    <div class="bg-green-200 p-4 rounded-xl relative animate-fadeInUp">
                         <canvas id="vaccineVN" width="100" height="50"></canvas>
                         <div class="absolute top-0 left-0 p-4">
                             <p class="font-bold text-green-500 uppercase">Vaccine</p>
                         </div>
                     </div>
 
-                    <div class="bg-neutral-200 p-4 rounded-xl relative">
+                    <div class="bg-neutral-200 p-4 rounded-xl relative animate-fadeInUp">
                         <canvas id="deathVN" width="100" height="50"></canvas>
                         <div class="absolute top-0 left-0 p-4">
                             <p class="font-bold text-neutral-500 uppercase">Tử vong</p>
@@ -191,6 +193,7 @@
     </div>
 
     <script src="./script/index.js" type="module"></script>
+    <script src="./script/animate.js"></script>
 </body>
 
 </html>

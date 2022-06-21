@@ -1,3 +1,5 @@
+import anime from "animejs";
+
 // const urlCovidWorld = "https://disease.sh/v3/covid-19/historical/all?lastdays=all";
 const urlVN = "https://disease.sh/v3/covid-19/historical/vn?lastdays=all";
 const urlCovidVN = "https://api.zingnews.vn/public/v2/corona/getChart";
