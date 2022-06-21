@@ -25,7 +25,11 @@
 
 <body class="text-gray-600">
     <!-- Nav -->
-    <nav class="w-24 bg-gray-100 h-screen fixed inset-0 z-[200]">
+    <span class="md:hidden fixed left-3 top-3 text-3xl bg-gray-300 flex justify-center items-center p-2 rounded-md z-[201] shadow-md cursor-pointer" id="sidebar-menu">
+        <i class="ph-list-bold text-black"></i>
+        <i class="ph-x-bold hidden-important text-black"></i>
+    </span>
+    <nav class="h-screen w-full transition-transform translate-x-[-100%] md:translate-x-0 bg-gray-100 fixed inset-0 z-[200] md:w-24">
         <div class="flex flex-col">
             <div class="font-extrabold uppercase text-xs text-center py-12 text-blue-600" style="font-family: sans-serif">
                 <a href="/index.html">
@@ -33,23 +37,28 @@
                     <span>tracker</span>
                 </a>
             </div>
+
             <div class="flex flex-col text-3xl peer">
                 <a href="/" class="peer hover:text-blue-600 py-10 h-12 w-full flex justify-center items-center">
                     <i class="ph-house"></i>
+                    <span class="text-xl font-bold ml-4 md:hidden">Trang chủ</span>
                 </a>
                 <a href="/news.html" class="hover:text-blue-600 py-10 h-12 w-full flex justify-center items-center">
                     <i class="ph-newspaper"></i>
+                    <span class="text-xl font-bold ml-4 md:hidden">Tin tức</span>
                 </a>
                 <a href="/world.html" class="hover:text-blue-600 py-10 h-12 w-full flex justify-center items-center nav-active">
                     <i class="ph-globe-hemisphere-east"></i>
+                    <span class="text-xl font-bold ml-4 md:hidden">Thế giới</span>
                 </a>
                 <a href="/aboutme.html" class="hover:text-blue-600 py-10 h-12 w-full flex justify-center items-center">
                     <i class="ph-users"></i>
+                    <span class="text-xl font-bold ml-4 md:hidden">Về chúng tôi</span>
                 </a>
             </div>
 
             <div
-                class="absolute w-0 h-full bg-gray-100 inset-0 overflow-hidden translate-x-24 peer-hover:w-60 transition-all hover:w-60">
+                class="absolute w-0 h-full bg-gray-100 inset-0 overflow-hidden translate-x-24 peer-hover:w-60 transition-all hover:w-60 hidden md:block">
                 <div class="flex flex-col mt-32">
                     <div class="flex flex-col text-lg font-semibold">
                         <a href="/"
@@ -74,8 +83,7 @@
     </nav>
     <!-- End nav -->
 
-
-    <div class="main">
+    <div class="min-h-screen md:ml-24 px-4 py-16 md:px-16">
         <div class="w-full text-center mb-16">
             <h1 class="font-extrabold text-4xl text-gray-600 uppercase tracking-wider animate-fadeInUp">Số liệu Covid-19 toàn thế giới</h1>
         </div>
@@ -181,6 +189,7 @@
 
     <script src="./script/world.js" type="module"></script>
     <script src="./script/animate.js"></script>
+    <script src="./script/sidebar.js"></script>
 </body>
 
 </html>
