@@ -153,7 +153,7 @@ const setCovidChart = (data) => {
         data.toDay
     )}`;
     let totalDeath = 0;
-    data.cases.forEach((e) => {
+    vnSeason4Daily.cases.forEach((e) => {
         totalDeath += e.y;
     });
     infoCovid.querySelector("p:nth-child(2)").textContent = `${numberWithCommas(
