@@ -152,8 +152,12 @@ const setCovidChart = (data) => {
     infoCovid.querySelector("p").textContent = `+${numberWithCommas(
         data.toDay
     )}`;
+    let totalDeath = 0;
+    data.cases.forEach((e) => {
+        totalDeath += e.y;
+    });
     infoCovid.querySelector("p:nth-child(2)").textContent = `${numberWithCommas(
-        data.total
+        totalDeath
     )}`;
 };
 
