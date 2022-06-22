@@ -4,7 +4,7 @@
 //     headerTitle.classList.add('animate__animated', 'animate__fadeInUp');
 // })
 
-function scrollTrigger(selector, options = {}) {
+export default function scrollTrigger(selector, options = {}) {
   let els = document.querySelectorAll(selector)
   els = Array.from(els)
   els.forEach(el => {

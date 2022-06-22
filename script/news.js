@@ -1,3 +1,5 @@
+import scrollTrigger from './animate';
+
 const newsUrl =
     "https://gw.vnexpress.net/ar/get_rule_2?category_id=1004765&limit=50&page=1&data_select=title,share_url,thumbnail_url,lead,publish_time";
 
@@ -40,8 +42,7 @@ getDataFromURL(newsUrl).then((result) => {
             </div>
         `;
             news.appendChild(newsItem);
-            scrollTrigger('.news-item', {
-            });
+            scrollTrigger('.news-item');
         });
     };
 
